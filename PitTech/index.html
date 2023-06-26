@@ -13,8 +13,8 @@
     integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 </head>
 
-<body>
-  <nav style="background-color: #ff8e00;" class="cor-fundo navbar navbar-expand-md">
+<body class="main-background">
+  <nav class="cor-fundo navbar navbar-expand-md footer-bg">
     <div class=" container-fluid">
       <a style="margin-right: 40px; margin-left: 40px;" class="navbar-brand" href="#">
         <h1 class="m-0"><img class="d-block" src="./assets/logodog3.png" style="width: 120px;" alt="PitTech"></h1>
@@ -27,10 +27,10 @@
 
         <form class="d-flex collapse navbar-collapse" role="search">
           <input class="form-control me-2 rounded-0" type="search" placeholder="Digite o produto" aria-label="Search">
-          <button class="btn btn-outline-light rounded-0" type="submit">Buscar</button>
+          <button class="btn btn-outline-dark rounded-0" type="submit">Buscar</button>
         </form>
-        <a style="margin: 25px; color: black;" class="bi bi-person-circle fs-1" href="#"><p class="texto-menor">Faça Login ou crie seu Cadastro</p></a>
-        <a style="margin: 25px; color: black;" class="bi bi-cart3 fs-2" href="#"></a>
+          <a style="margin-left: 35px; margin-right: 35px; color: black;" class="bi bi-person-circle fs-1" href="#"><div class="texto-menor div-login-cadastro">Faça LOGIN ou<p>crie seu CADASTRO</p></div></a>
+        <a style="margin-left: 15px; margin-right: 35px ;color: black;" class="bi bi-cart3 fs-2" href="#"></a>
         </ul>
       </div>
     </div>
@@ -47,7 +47,7 @@
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"
         class=""></button>
     </div>
-    <div class="carousel-inner">
+    <div class="carousel-inner main-background">
       <div class="carousel-item active">
         <img class="img-fluid d-md-none d-xl-none" src="./assets/Mobile/banner1-mobile.png"
           alt="Modelo feminina vestindo blusa rosa">
@@ -95,7 +95,7 @@
     </button>
   </div>
 
-  <h2 class="text-center my-3 my-xl-5">Busque por Categoria</h2>
+  <h2 class="text-center my-3 my-xl-5">Categorias</h2>
   <div class="container row mx-auto g-4">
     <div class="col-6 col-md-4 col-xxl-2 ">
       <div class="card rounded-0 border-0">
@@ -287,10 +287,11 @@
         </div>
       </div>
     </div>
+  </div>
   </section>
 
   <div class="divs-novidades"></div>
-  <footer class="text-center">
+  <footer class="text-center footer-bg">
     <p class="py-3">2023 <i class="bi bi-c-circle"></i> Desenvolvido pelos alunos do CEFET-Leopoldina | Projeto sem fins
       comerciais</p>
   </footer>

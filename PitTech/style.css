@@ -10,3 +10,25 @@
 .div-novidades{
     width: 325px;
 }
+
+.main-background{
+    background-color: #7f7f7f;
+}
+
+.div-login-cadastro{
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.div-categorias{
+    padding-bottom: 3%;
+}
+
+.footer-bg{
+    background-color: #ff8e00;
+}
+
+.div-pagina-produto{
+    width: 45%;
+}
