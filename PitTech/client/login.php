@@ -9,7 +9,7 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 		$erro = true;
 
 	if (!$erro) {
-		include("../API/usuario.php");
+		include("../API/Usuario.php");
 		include("../API/Conn.php");
 
 		$dbConnection = new DatabaseConnection();
@@ -29,8 +29,8 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 
 	}
 } else if (isset($_POST['nome_cadastro'], $_POST['email_cadastro'], $_POST['senha_cadastro'], $_POST['confirmar_cadastro'])) {
-	include("./API/usuario.php");
-	include("./API/Conn.php");
+	include("../API/usuario.php");
+	include("../API/Conn.php");
 
 	$erro = false;
 
