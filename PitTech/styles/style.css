@@ -11,9 +11,9 @@
     width: 325px;
 }
 
-.main-background {
+/* .main-background {
     background-color: #7f7f7f;
-}
+} */
 
 .div-login-cadastro {
     display: inline-block;
@@ -85,4 +85,23 @@
   
   .inputGroup :is(input:focus, input:valid) {
     border-color: #ff8e00;
+  }
+
+  /* card produto */
+
+  .button{
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+
+  .button:hover{
+    background-color: #ff8e00;
+    color: #ffffff;
+  }
+
+  .valor{
+    font-weight: 700;
+    font-size: 25px;
+    color: #ff8e00;
   }

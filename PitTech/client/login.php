@@ -9,8 +9,8 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 		$erro = true;
 
 	if (!$erro) {
-		include("./API/usuario.php");
-		include("./API/Conn.php");
+		include("../API/Usuario.php");
+		include("../API/Conn.php");
 
 		$dbConnection = new DatabaseConnection();
 		$conexao = $dbConnection->connectDB();
@@ -26,8 +26,8 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 		}
 	}
 } else if (isset($_POST['nome_cadastro'], $_POST['email_cadastro'], $_POST['senha_cadastro'], $_POST['confirmar_cadastro'])) {
-	include("./API/usuario.php");
-	include("./API/Conn.php");
+	include("../API/usuario.php");
+	include("../API/Conn.php");
 
 	$erro = false;
 
@@ -86,7 +86,7 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 												<input type="password" class="form-style" placeholder="Password" name="senha_login">
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<button type="submit" onclick="$var=1" class="btn mt-4">Login</button>
+											<button type="submit" class="btn mt-4">Login</button>
 											</form>
 											<p class="mb-0 mt-4 text-center"><a href="https://www.web-leb.com/code" class="link">Esqueceu sua senha?</a></p>
 										</div>
@@ -113,7 +113,7 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 												<input type="password" class="form-style" placeholder="Confirmar Senha" name='confirmar_cadastro'>
 												<i class="input-icon uil uil-lock-alt"></i>
 											</div>
-											<button type="submit" onclick="$var=0" class="btn mt-4">Registrar</a>
+											<button type="submit" class="btn mt-4">Registrar</a>
 												</form>
 										</div>
 									</div>

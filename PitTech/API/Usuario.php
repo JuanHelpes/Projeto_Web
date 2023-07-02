@@ -21,15 +21,25 @@ class Usuario {
 
     public function registrar($nome, $email, $senha, $confirmarSenha)
     {
-                $sql = "INSERT INTO usuario (nome, email, senha) VALUES ('$nome','$email','$senha')";
-                $stmt = $this->conn->prepare($sql);
+        $sql = "INSERT INTO usuario (nome, email, senha) VALUES ('$nome','$email','$senha')";
+        $stmt = $this->conn->prepare($sql);
 
-                if ($stmt->execute()) {
-                    return true;
-                } else {
-                    return false;
-                }
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function dadosUsuario($idUsuario){
+
+
+    $sql_code = "SELECT * FROM usuario WHERE idUsuario = '$idUsuario' LIMIT 1";
+    $sql_exec = $this->conn->prepare($sql_code) or die($this->conn->query);
+
+    $usuario = $sql_exec->fetch_assoc();
+
+    return $usuario;
+    
     }
 }
-
-?>
