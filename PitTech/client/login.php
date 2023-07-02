@@ -37,7 +37,7 @@ else if(isset($_POST['nome_cadastro'], $_POST['email_cadastro'], $_POST['senha_c
 
 	$erro = false;
 
-	if($_POST['nome_cadastro'] == '' ||  $_POST['email_cadastro'] == '' || $_POST['senha_cadastro'] == '' || $_POST['confirmar_cadastro']))
+	if($_POST['nome_cadastro'] == '' ||  $_POST['email_cadastro'] == '' || $_POST['senha_cadastro'] == '' || $_POST['confirmar_cadastro'])
     $dbConnection = new DatabaseConnection();
     $conexao = $dbConnection->connectDB();
     
