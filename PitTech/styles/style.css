@@ -12,7 +12,7 @@
 }
 
 .main-background {
-    background-color: #7f7f7f;
+    background-color: #f7f7f7;
 }
 
 .div-login-cadastro {
@@ -27,6 +27,9 @@
 
 .footer-bg {
     background-color: #ff8e00;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
 .div-pagina-produto {
