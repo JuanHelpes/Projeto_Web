@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 if (isset($_POST['email_login'], $_POST['senha_login'])) {
 
 	$erro = false;
@@ -18,9 +16,12 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 		$email = $_POST['email_login'];
 		$senha = $_POST['senha_login'];
 		$usuario = new Usuario($conexao);
-
-		if ($usuario->login($email, $senha)) {
-			$_SESSION['usuario'] = $email;
+		$result = $usuario->login($email, $senha);
+		
+		if ($result != False) {
+			session_start();	
+			$dados = $result->fetch(PDO::FETCH_ASSOC);
+			$_SESSION['id'] = $dados['idUsuario'];
 			header("Location: index.html");
 		} else {
 
@@ -37,7 +38,7 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 	if ($_POST['nome_cadastro'] == '' ||  $_POST['email_cadastro'] == '' || $_POST['senha_cadastro'] == '' || $_POST['confirmar_cadastro'])
 		$erro = true;
 	
-	if(!password_verify($senha, $usuario['senha']))
+	if($_POST['senha_cadastro'] != $_POST['confirmar_cadastro'])
 		$erro = true;
 
 	if(!$erro)

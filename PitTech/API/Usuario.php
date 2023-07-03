@@ -13,7 +13,7 @@ class Usuario {
         $stmt->execute();
 
         if ($stmt->rowCount() == 1) {
-            return true;
+            return $stmt;
         } else {
             return false;
         }
