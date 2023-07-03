@@ -1,3 +1,18 @@
+<?php 
+
+$id = intval($_GET['id']);
+include("../API/Produto.php");
+include("../API/Conn.php");
+
+$dbConnection = new DatabaseConnection();
+$conexao = $dbConnection->connectDB();
+
+$produto = new Produto($conexao);
+
+$produto = $produto->pesquisa_id($id);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -48,28 +63,29 @@
   <div class="d-flex justify-content-center m-3">
     <div id="carouselExampleIndicators" class="carousel slide carousel-fade w-25 m-3" data-ride="carousel">
       <ol class="carousel-indicators">
+        <?php if($produto['imagem1'] != NULL) ?>
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <?php if($produto['imagem2'] != NULL) ?>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <?php if($produto['imagem3'] != NULL) ?>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
       </ol>
       <div class="carousel-inner">
+      <?php if($produto['imagem1'] != NULL) { ?>
         <div class="carousel-item active">
-          <img class="d-block w-100" src="./assets/Mobile/banner1-mobile.png" alt="First slide">
+          <img class="d-block w-100" src="<?php echo $produto['imagem1']; ?>" alt="First slide">
         </div>
-        <div class="carousel-item ">
-          <img class="d-block w-100" src="./assets/Mobile/banner2-mobile.png" alt="Second slide">
+        <?php } ?>
+        <?php if($produto['imagem2'] != NULL) { ?>
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="<?php echo $produto['imagem2']; ?>" alt="First slide">
         </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="./assets/Mobile/banner3-mobile.png" alt="Third slide">
+        <?php } ?>
+        <?php if($produto['imagem3'] != NULL) { ?>
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="<?php echo $produto['imagem3']; ?>" alt="First slide">
         </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="./assets/Mobile/banner2-mobile.png" alt="Third slide">
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="./assets/Mobile/banner1-mobile.png" alt="Third slide">
-        </div>
+        <?php } ?>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -81,12 +97,11 @@
       </a>
     </div>
     <div class="d-flex flex-column  m-4 p-4 w-25 align-items-center">
-      <h1 style="color: #ff8e00; font-weight: 400;" class="text-decoration-none m-1 p-1" href="#"> Nome do
-        Produto</h1>
-      <h5 style="color: #ff8e00; font-weight: 400;" class="text-decoration-none m-1 p-1">Restam: 100 un.</h5>
+      <h1 style="color: #ff8e00; font-weight: 400;" class="text-decoration-none m-1 p-1" href="#"><?php echo $produto['descricao']; ?></h1>
+      <h5 style="color: #ff8e00; font-weight: 400;" class="text-decoration-none m-1 p-1"><?php echo $produto['estoque']; ?></h5>
       <div style="background-color: #E5FFF1;" class="d-flex flex-column align-items-center p-2 mt-5 w-75 shadow">
         <p class="bi bi-cash fs-6"> Valor à vista no <strong>Pix</strong></p>
-        <p style="color: #1F9050; font-size: 18px;"><strong>R$550,00</strong></p>
+        <p style="color: #1F9050; font-size: 18px;"><strong><?php echo $produto['valor']; ?></strong></p>
       </div>
       <div class="d-flex flex-column w-auto align-items-center mt-auto">
         <a style="color: #ff8e00; font-weight: 500; border-radius: 15px;"

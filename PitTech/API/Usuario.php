@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Usuario {
     private $conn;
 
@@ -13,8 +11,6 @@ class Usuario {
         $sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-
-        
 
         if ($stmt->rowCount() == 1) {
             $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
