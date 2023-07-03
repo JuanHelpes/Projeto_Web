@@ -43,6 +43,10 @@
     overflow: hidden;
 }
 
+.compra{ 
+  background-color: white;
+}
+
 .compra:hover{
     background-color: black;
 }
