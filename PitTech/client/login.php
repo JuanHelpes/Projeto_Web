@@ -20,9 +20,8 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
 		
 		if ($result != False) {
 			session_start();	
-			// $dados = $result->fetch(PDO::FETCH_ASSOC);
 			$_SESSION['id'] = $result['idUsuario'];
-			header("Location: usuario.php?");
+			header("Location: usuario.php");
 		} else {
 
 		}

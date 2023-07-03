@@ -39,12 +39,51 @@ class Usuario {
     public function dadosUsuario($idUsuario){
 
 
-    $sql_code = "SELECT * FROM usuario WHERE idUsuario = '$idUsuario' LIMIT 1";
-    $sql_exec = $this->conn->prepare($sql_code) or die($this->conn->query);
+    $sql_code = "SELECT nome, email FROM usuario WHERE idUsuario = '$idUsuario' LIMIT 1";
+    $stmt = $this->conn->prepare($sql_code);
+    $stmt->execute();
 
-    $usuario = $sql_exec->fetch_assoc();
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $usuario;
+    }
+
+    public function enderecoUsuario($idUsuario){
+
+
+        $sql_code = "SELECT * FROM endereco WHERE idUsuario = '$idUsuario' LIMIT 1";
+        $stmt = $this->conn->prepare($sql_code);
+        $stmt->execute();
+    
+        $endereco = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $endereco;
+    }
+
+    public function atualizaDados($idUsuario, $nome, $email, $cep, $logradouro, $numero, $bairro, $cidade, $complemento, $uf){
+
+
+        $sql_code = "UPDATE usuario SET nome= '$nome' ,email= '$email'  WHERE idUsuario = '$idUsuario'";
+        $stmt = $this->conn->prepare($sql_code);
+        $stmt->execute();
+        $req1 = false;
+        if ($stmt->execute()) {
+            $req1 = true;
+        }
+
+        $sql_code = "UPDATE endereco SET logradouro='$logradouro', numero='$numero',
+        bairro='$bairro',cidade ='$cidade',cep='$cep',uf='$uf',complemento='$complemento' WHERE idUsuario='$idUsuario'";
+        $stmt = $this->conn->prepare($sql_code);
+        $stmt->execute();
+        $req2 = false;
+        if ($stmt->execute()) {
+            $req2 = true;
+        }
+
+        if($req1 and $req2) {
+            return true;
+        }else
+            return false;
     
     }
 }

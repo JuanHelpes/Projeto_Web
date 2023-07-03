@@ -2,44 +2,63 @@
 include("../API/usuario.php");
 include("../API/Conn.php");
 
-if(!isset($_SESSION)){
+if (!isset($_SESSION)) {
     session_start();
 }
-
-
 
 $dbConnection = new DatabaseConnection();
 $conexao = $dbConnection->connectDB();
 
 $usuario = new Usuario($conexao);
 
-$endereço = $usuario->dadosUsuario($_SESSION['id']);
+$dadosUsuario = $usuario->dadosUsuario($_SESSION['id']);
 
-if (isset($_POST['email_login'], $_POST['senha_login'])) {
+$dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
 
-    $erro = false;
+if (count($_POST)> 0) {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    
+    $cep = $_POST['cep'];
+    $logradouro = $_POST['logradouro'];
+    $numero = $_POST['numero'];
+    $bairro = $_POST['bairro'];
+    $cidade = $_POST['cidade'];
+    $complemento = $_POST['complemento'];
+    $uf = $_POST['uf'];
 
-    if ($_POST['email_login'] == '' || $_POST['senha_login'] == '')
-        $erro = true;
-
-    if (!$erro) {
-        include("../API/usuario.php");
-        include("../API/Conn.php");
-
-        $dbConnection = new DatabaseConnection();
-        $conexao = $dbConnection->connectDB();
-
-        $email = $_POST['email_login'];
-        $senha = $_POST['senha_login'];
-        $usuario = new Usuario($conexao);
-
-        if ($usuario->login($email, $senha)) {
-            $_SESSION['usuario'] = $email;
-            header("Location: index.html");
-        } else {
-        }
-    }
+    if($usuario->atualizaDados($_SESSION['id'], $nome, $email, $cep, $logradouro, $numero, $bairro, $cidade, $complemento, $uf)){
+        $dadosUsuario = $usuario->dadosUsuario($_SESSION['id']);
+        $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
+        echo 'alterado com sucesso';
+    }else echo "Error";
 }
+
+// if (isset($_POST['email_login'], $_POST['senha_login'])) {
+
+//     $erro = false;
+
+//     if ($_POST['email_login'] == '' || $_POST['senha_login'] == '')
+//         $erro = true;
+
+//     if (!$erro) {
+//         include("../API/usuario.php");
+//         include("../API/Conn.php");
+
+//         $dbConnection = new DatabaseConnection();
+//         $conexao = $dbConnection->connectDB();
+
+//         $email = $_POST['email_login'];
+//         $senha = $_POST['senha_login'];
+//         $usuario = new Usuario($conexao);
+
+//         if ($usuario->login($email, $senha)) {
+//             $_SESSION['usuario'] = $email;
+//             header("Location: index.html");
+//         } else {
+//         }
+//     }
+// }
 
 
 
@@ -88,75 +107,70 @@ if (isset($_POST['email_login'], $_POST['senha_login'])) {
         DADOS</h3>
     <div class="d-flex m-2">
         <div class="d-flex flex-column container">
-            <form action="" method="POST">
+            <form method="POST">
                 <div class="d-flex flex-column container  mt-4 shadow g-col-6">
                     <div class="d-flex align-items-center ">
                         <a style="color: #ff8e00;" class="bi bi-file-earmark-text-fill fs-2" href="#"></a>
                         <h4 class="m-0">DADOS BÁSICOS</h4>
                     </div>
                     <div class="inputGroup">
-                        <input type="text" name="nome" required="" autocomplete="off">
+                        <input type="text" name="nome" required autocomplete="off" value=<?php echo $dadosUsuario['nome'] ?>>
                         <label for="name">Nome completo*</label>
                     </div>
                     <div class="inputGroup">
-                        <input type="text" name="email" required="" autocomplete="off">
+                        <input type="text" name="email" required autocomplete="off" value=<?php echo $dadosUsuario['email'] ?>>
                         <label for="name">Email</label>
                     </div>
                     <div class="inputGroup">
-                        <input type="text" name="senha" required="" autocomplete="off">
+                        <input type="text" name="senha" autocomplete="off" required>
                         <label for="name">Senha</label>
                     </div>
                     <div class="inputGroup">
-                        <input type="text" name="confirmarSenha" required="" autocomplete="off">
+                        <input type="text" name="confirmarSenha" required autocomplete="off">
                         <label for="name">Confirmar senha</label>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <a type="submit" style="color: #ff8e00; font-weight: 500; border-radius: 15px; width: 70px;" class="compra text-decoration-none m-1 border p-1 border-dark border p-1" href="#">
-                            SALVAR </a>
+                        <button type="submit" style="color: #ff8e00; font-weight: 500; border-radius: 15px; width: 270px;" class="compra m-1 border p-1 border-dark border p-1">
+                            SALVAR TODAS AS INFORMAÇÕES </button>
                     </div>
                 </div>
-            </form>
         </div>
         <div class="d-flex flex-column container">
-            <form action="" method="POST">
-                <div class="d-flex flex-column container  mt-4 shadow g-col-6">
-                    <div class="d-flex align-items-center ">
-                        <a style="color: #ff8e00;" class="bi bi-geo-alt-fill fs-2" href="#"></a>
-                        <h4 class="m-0">ENDEREÇO</h4>
-                    </div>
-                    <div class="inputGroup">
-                        <input type="text" name="cep" required="" autocomplete="off">
-                        <label for="name">CEP*</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input type="text" name="logradouro" required="" autocomplete="off">
-                        <label for="name">Logradouro*</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input type="text" name="numero" required="" autocomplete="off">
-                        <label for="name">Numero*</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input type="text" name="bairro" required="" autocomplete="off">
-                        <label for="name">Bairro*</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input type="text" name="cidade" required="" autocomplete="off">
-                        <label for="name">Cidade*</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input type="text" name="complemento" required="" autocomplete="off">
-                        <label for="name">Complemento</label>
-                    </div>
-                    <div class="inputGroup">
-                        <input type="text" name="uf" required="" autocomplete="off">
-                        <label for="name">UF*</label>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <a type="submit" style="color: #ff8e00; font-weight: 500; border-radius: 15px; width: 70px;" class="compra fs-6 text-decoration-none m-1 border p-1 border-dark border p-1" href="#">
-                            SALVAR </a>
-                    </div>
+
+            <div class="d-flex flex-column container  mt-4 shadow g-col-6">
+                <div class="d-flex align-items-center ">
+                    <a style="color: #ff8e00;" class="bi bi-geo-alt-fill fs-2" href="#"></a>
+                    <h4 class="m-0">ENDEREÇO</h4>
                 </div>
+                <div class="inputGroup">
+                    <input type="text" name="cep" required="" autocomplete="off" value=<?php if (!empty($dadosEndereco['cep'])) echo $dadosEndereco['cep'] ?>>
+                    <label for="name">CEP*</label>
+                </div>
+                <div class="inputGroup">
+                    <input type="text" name="logradouro" required="" autocomplete="off" value=<?php if (!empty($dadosEndereco['logradouro'])) echo $dadosEndereco['logradouro'] ?>>
+                    <label for="name">Logradouro*</label>
+                </div>
+                <div class="inputGroup">
+                    <input type="text" name="numero" required="" autocomplete="off" value=<?php if (!empty($dadosEndereco['numero'])) echo $dadosEndereco['numero'] ?>>
+                    <label for="name">Numero*</label>
+                </div>
+                <div class="inputGroup">
+                    <input type="text" name="bairro" required="" autocomplete="off" value=<?php if (!empty($dadosEndereco['bairro'])) echo $dadosEndereco['bairro'] ?>>
+                    <label for="name">Bairro*</label>
+                </div>
+                <div class="inputGroup">
+                    <input type="text" name="cidade" required="" autocomplete="off" value=<?php if (!empty($dadosEndereco['cidade'])) echo $dadosEndereco['cidade'] ?>>
+                    <label for="name">Cidade*</label>
+                </div>
+                <div class="inputGroup">
+                    <input type="text" name="complemento" required="" autocomplete="off" value=<?php if (!empty($dadosEndereco['complemento'])) echo $dadosEndereco['complemento'] ?>>
+                    <label for="name">Complemento</label>
+                </div>
+                <div class="inputGroup">
+                    <input type="text" name="uf" required="" autocomplete="off" value=<?php if (!empty($dadosEndereco['uf'])) echo $dadosEndereco['uf'] ?>>
+                    <label for="name">UF*</label>
+                </div>
+            </div>
             </form>
         </div>
     </div>
