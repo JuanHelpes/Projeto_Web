@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Usuario {
     private $conn;
 
@@ -12,7 +14,10 @@ class Usuario {
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 
+        
+
         if ($stmt->rowCount() == 1) {
+            $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
             return $stmt;
         } else {
             return false;

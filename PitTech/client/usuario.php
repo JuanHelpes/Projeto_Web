@@ -2,7 +2,18 @@
 include("../API/usuario.php");
 include("../API/Conn.php");
 
+if(!isset($_SESSION)){
+    session_start();
+}
 
+
+
+$dbConnection = new DatabaseConnection();
+$conexao = $dbConnection->connectDB();
+
+$usuario = new Usuario($conexao);
+
+$endereço = $usuario->dadosUsuario($_SESSION['id']);
 
 if (isset($_POST['email_login'], $_POST['senha_login'])) {
 
