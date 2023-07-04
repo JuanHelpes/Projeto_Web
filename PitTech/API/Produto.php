@@ -30,4 +30,27 @@ class Produto {
             return false;
         }
     }
+
+    public function pesquisaCarrinho($idUsuario) {
+        $sql = "select descricao, valor, imagem1, idProduto from produto inner join carrinho  on (idProduto = produto_idproduto) inner join usuario on (idUsuario = Usuario_idUsuario)  where idUsuario = '$idUsuario'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        if ($stmt->rowCount() >= 1) {
+            $stmt = $stmt->fetchAll();
+            return $stmt;
+        } else {
+            return false;
+        }
+    }
+
+    public function retirarCarrinho($idUsuario, $idProduto) {
+        $sql = "delete from carrinho where Usuario_idUsuario = '$idUsuario' and produto_idproduto = '$idProduto' ";
+        $stmt = $this->conn->prepare($sql);
+        
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

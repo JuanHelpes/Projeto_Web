@@ -114,7 +114,7 @@ $produtos = $produtos->pesquisa();
                 <img style="max-width: 250px; max-height: 250px;" src="<?php echo $produto['imagem1']; ?>" alt="">
                 <span class="title"><strong><?php echo $produto['descricao']; ?></strong></span>
                 <span class="valor price">R$ <?php echo $produto['valor']; ?></span>
-                <button class="button w-75"><a href="produto.php?id=" <?php echo $produto['idProduto']; ?>">Ver mais</a></button>
+                <button class="button w-75"><a href="produto.php?id= <?php echo $produto['idProduto']; ?>">Ver mais</a></button>
                 <button class="button bi bi-cart3 fs-6 w-75">Adicionar no carrinho</button>
             </div>
         </div>
