@@ -25,8 +25,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <form class="d-flex collapse navbar-collapse" role="search">
-          <input class="form-control me-2 rounded-0" type="search" placeholder="Digite o produto" aria-label="Search">
+        <form class="d-flex collapse navbar-collapse" role="search" action="produtos_pesquisa.php" method="POST">
+          <input class="form-control me-2 rounded-0" type="search" placeholder="Digite o produto" aria-label="Search" name="palavra">
           <button class="btn btn-outline-dark rounded-0" type="submit">Buscar</button>
         </form>
           <a style="margin-left: 35px; margin-right: 35px; color: black;" class="bi bi-person-circle fs-1" href="#"><div class="texto-menor div-login-cadastro">Faça LOGIN ou<p>crie seu CADASTRO</p></div></a>
@@ -92,52 +92,64 @@
   <h2 class="text-center my-3 my-xl-5">Categorias</h2>
   <div class="container row mx-auto g-4">
     <div class="col-6 col-md-4 col-xxl-2">
+      <a href="produtos.php?categoria=1" style="text-decoration: none;"">
       <div class="card rounded-0 border-0">
         <img src="../assets/hardware.jpeg" alt="Camiseta masculina">
         <div class="card-body bg-black">
           <p class="text-center text-light">HARDWARE</p>
         </div>
       </div>
+    </a>
     </div>
     <div class="col-6 col-md-4 col-xxl-2">
+      <a href="produtos.php?categoria=2" style="text-decoration: none;">
       <div class="card rounded-0 border-0">
         <img src="../assets/periferico.png" alt="Casaco masculino">
         <div class="card-body bg-black">
           <p class="text-center text-light">PERIFÉRICOS</p>
         </div>
       </div>
+    </a>
     </div>
     <div class="col-6 col-md-4 col-xxl-2">
+      <a href="produtos.php?categoria=3" style="text-decoration: none;">
       <div class="card rounded-0 border-0">
         <img src="../assets/computadores.png" alt="oculos">
         <div class="card-body bg-black">
           <p class="text-center text-light">COMPUTADORES</p>
         </div>
       </div>
+    </a>
     </div>
     <div class="col-6 col-md-4 col-xxl-2">
+      <a href="produtos.php?categoria=4" style="text-decoration: none;">
       <div class="card rounded-0 border-0">
         <img src="../assets/games.png" alt="calças masculinas">
         <div class="card-body bg-black">
           <p class="text-center text-light">GAMES</p>
         </div>
       </div>
+    </a>
     </div>
     <div class="col-6 col-md-4 col-xxl-2">
+      <a href="produtos.php?categoria=5" style="text-decoration: none;">
       <div class="card rounded-0 border-0">
         <img src="../assets/notebook.png" alt="oculos">
         <div class="card-body bg-black">
           <p class="text-center text-light">NOTEBOOKS</p>
         </div>
       </div>
+    </a>
     </div>
     <div class="col-6 col-md-4 col-xxl-2">
+      <a href="produtos.php?categoria=6" style="text-decoration: none;">
       <div class="card rounded-0 border-0">
         <img src="../assets/cadeira.png" alt="oculos">
         <div class="card-body bg-black">
           <p class="text-center text-light">ACESSORIOS</p>
         </div>
       </div>
+    </a>
     </div>
   </div>
 

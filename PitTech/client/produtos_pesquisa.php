@@ -3,14 +3,16 @@
 include("../API/Produto.php");
 include("../API/Conn.php");
 
+if (count($_POST)> 0) {
 $dbConnection = new DatabaseConnection();
 $conexao = $dbConnection->connectDB();
 
 $produtos = new Produto($conexao);
 
-$categoria = intval($_GET['categoria']);
-$produtos = $produtos->pesquisa($categoria);
+$palavra = $_POST['palavra'];
+$produtos = $produtos->pesquisa_palavra($palavra);
 
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,56 +61,8 @@ $produtos = $produtos->pesquisa($categoria);
     </nav>
 
     <!-- Example Code -->
-    <h2 class="container text-center my-3 my-xl-5">Categoria: XX</h2>
-
+    <h2 class="container text-center my-3 my-xl-5">Resultados:</h2>
     <div class="container row mx-auto g-4">
-        <!-- <div class="col-md-6 col-sm-12 col-xl-4 ">
-            <div class="d-flex flex-column card align-items-center w-75 p-4 gap-1 shadow">
-                <img style="max-width: 250px; max-height: 250px;" src="../assets/exemplo.jpg" alt="">
-                <span class="title"><strong>Nome do Produto</strong></span>
-                <span class="valor price">R$ 300,00</span>
-                <button class="button w-75 ">Ver mais</button>
-                <button class="button bi bi-cart3 fs-6 w-75">Adicionar no carrinho</button>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-sm-12 col-xl-4">
-            <div class="d-flex flex-column card align-items-center w-75 p-4 gap-1 shadow">
-                <img style="max-width: 250px; max-height: 250px;" src="../assets/exemplo.jpg" alt="">
-                <span class="title"><strong>Nome do Produto</strong></span>
-                <span class="valor price">R$ 300,00</span>
-                <button class="button w-75 ">Ver mais</button>
-                <button class="button bi bi-cart3 fs-6 w-75">Adicionar no carrinho</button>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-12 col-xl-4">
-            <div class="d-flex flex-column card align-items-center w-75 p-4 gap-1 shadow">
-                <img style="max-width: 250px; max-height: 250px;" src="../assets/exemplo.jpg" alt="">
-                <span class="title"><strong>Nome do Produto</strong></span>
-                <span class="valor price">R$ 300,00</span>
-                <button class="button w-75 ">Ver mais</button>
-                <button class="button bi bi-cart3 fs-6 w-75">Adicionar no carrinho</button>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-12 col-xl-4">
-            <div class="d-flex flex-column card align-items-center w-75 p-4 gap-1 shadow">
-                <img style="max-width: 250px; max-height: 250px;" src="../assets/exemplo.jpg" alt="">
-                <span class="title"><strong>Nome do Produto</strong></span>
-                <span class="valor price">R$ 300,00</span>
-                <button class="button w-75 ">Ver mais</button>
-                <button class="button bi bi-cart3 fs-6 w-75">Adicionar no carrinho</button>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-sm-12 col-xl-4">
-            <div class="d-flex flex-column card align-items-center w-75 p-4 gap-1 shadow">
-                <img style="max-width: 250px; max-height: 250px;" src="../assets/exemplo.jpg" alt="">
-                <span class="title"><strong>Nome do Produto</strong></span>
-                <span class="valor price">R$ 300,00</span>
-                <button class="button w-75 ">Ver mais</button>
-                <button class="button bi bi-cart3 fs-6 w-75">Adicionar no carrinho</button>
-            </div>
-        </div> -->
         <?php if($produtos != false) foreach($produtos as &$produto) { ?> 
         <div class="col-md-6 col-sm-12 col-xl-4">
             <div class="d-flex flex-column card align-items-center w-75 p-4 gap-1 shadow">

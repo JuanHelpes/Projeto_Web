@@ -7,8 +7,8 @@ class Produto {
         $this->conn = $conn;
     }
 
-    public function pesquisa() {
-        $sql = "SELECT * FROM produto";
+    public function pesquisa($categoria) {
+        $sql = "SELECT * FROM produto WHERE categoria='$categoria'";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         if ($stmt->rowCount() >= 1) {
@@ -25,6 +25,18 @@ class Produto {
         $stmt->execute();
         if ($stmt->rowCount() == 1) {
             $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt;
+        } else {
+            return false;
+        }
+    }
+
+    public function pesquisa_palavra($palavra) {
+        $sql = "SELECT * FROM produto WHERE descricao LIKE '%{$palavra}%'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        if ($stmt->rowCount() >= 1) {
+            $stmt = $stmt->fetchAll();
             return $stmt;
         } else {
             return false;

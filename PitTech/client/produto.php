@@ -61,47 +61,50 @@ $produto = $produto->pesquisa_id($id);
   </nav>
 
   <div class="d-flex justify-content-center m-3">
-    <div id="carouselExampleIndicators" class="carousel slide carousel-fade w-25 m-3" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <?php if($produto['imagem1'] != NULL) ?>
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <?php if($produto['imagem2'] != NULL) ?>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <?php if($produto['imagem3'] != NULL) ?>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-      <?php if($produto['imagem1'] != NULL) { ?>
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="<?php echo $produto['imagem1']; ?>" alt="First slide">
+  <div id="carouselExampleIndicators" class="carousel slide carousel-fade w-25 m-3" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <?php if(!empty($produto['imagem1'])) { ?>
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <?php } ?>
+            <?php if(!empty($produto['imagem2'])) { ?>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <?php } ?>
+            <?php if(!empty($produto['imagem3'])) { ?>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <?php } ?>
+        </ol>
+        <div class="carousel-inner">
+            <?php if(!empty($produto['imagem1'])) { ?>
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="<?php echo $produto['imagem1']; ?>" alt="First slide">
+                </div>
+            <?php } ?>
+            <?php if(!empty($produto['imagem2'])) { ?>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="<?php echo $produto['imagem2']; ?>" alt="Second slide">
+                </div>
+            <?php } ?>
+            <?php if(!empty($produto['imagem3'])) { ?>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="<?php echo $produto['imagem3']; ?>" alt="Third slide">
+                </div>
+            <?php } ?>
         </div>
-        <?php } ?>
-        <?php if($produto['imagem2'] != NULL) { ?>
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="<?php echo $produto['imagem2']; ?>" alt="First slide">
-        </div>
-        <?php } ?>
-        <?php if($produto['imagem3'] != NULL) { ?>
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="<?php echo $produto['imagem3']; ?>" alt="First slide">
-        </div>
-        <?php } ?>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-    <div class="d-flex flex-column  m-4 p-4 w-25 align-items-center">
-      <h1 style="color: #ff8e00; font-weight: 400;" class="text-decoration-none m-1 p-1" href="#"><?php echo $produto['descricao']; ?></h1>
-      <h5 style="color: #ff8e00; font-weight: 400;" class="text-decoration-none m-1 p-1"><?php echo $produto['estoque']; ?></h5>
+    <div class="d-flex flex-column m-4 p-4 w-25 align-items-center">
+      <h1 style="color: #ff8e00; font-weight: 400; font-size: 22px;" class="text-decoration-none m-1 p-1" href="#"><?php echo $produto['descricao'] ?></h1>
+      <h5 style="color: #ff8e00; font-weight: 400; font-size: 22px;" class="text-decoration-none m-1 p-1"><?php echo $produto['estoque']; ?></h5>
       <div style="background-color: #E5FFF1;" class="d-flex flex-column align-items-center p-2 mt-5 w-75 shadow">
         <p class="bi bi-cash fs-6"> Valor à vista no <strong>Pix</strong></p>
-        <p style="color: #1F9050; font-size: 18px;"><strong><?php echo $produto['valor']; ?></strong></p>
+        <p style="color: #1F9050; font-size: 18px;"><strong>R$ <?php echo $produto['valor']; ?></strong></p>
       </div>
       <div class="d-flex flex-column w-auto align-items-center mt-auto">
         <a style="color: #ff8e00; font-weight: 500; border-radius: 15px;"
@@ -118,12 +121,7 @@ $produto = $produto->pesquisa_id($id);
         <a style="color: #ff8e00; font-weight: 500; border-radius: 15px;"
           class="bi bi-caret-down-fill fs-3 w-10 align-items-end text-decoration-none"></a>
       </div>
-      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
-        at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
-        opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing
-        packages and web page editors now use Lorem Ipsum as theirdefault model text, and a search for 'lorem ipsum'
-        will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by
-        accident, sometimes on purpose (injected humour and the like).</p>
+      <p><?php if (!empty($produto['sobre'])) echo $produto['sobre'] ?></p>
     </div>
   </div>
 
