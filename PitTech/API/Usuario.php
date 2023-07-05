@@ -67,13 +67,28 @@ class Usuario {
             $req1 = true;
         }
 
-        $sql_code = "UPDATE endereco SET logradouro='$logradouro', numero='$numero',
-        bairro='$bairro',cidade ='$cidade',cep='$cep',uf='$uf',complemento='$complemento' WHERE idUsuario='$idUsuario'";
+
+        
+        $sql_code = "select * from endereco WHERE idUsuario = '$idUsuario'";
         $stmt = $this->conn->prepare($sql_code);
         $stmt->execute();
-        $req2 = false;
-        if ($stmt->execute()) {
-            $req2 = true;
+
+        if ($stmt->rowCount() > 0) {
+            $sql_code = "UPDATE endereco SET logradouro='$logradouro', numero='$numero',bairro='$bairro',cidade ='$cidade',cep='$cep',uf='$uf',complemento='$complemento' WHERE idUsuario='$idUsuario'";
+            $stmt = $this->conn->prepare($sql_code);
+            $stmt->execute();
+            $req2 = false;
+            if ($stmt->execute()) {
+                $req2 = true;
+            }
+        }else{
+            $sql_code = "INSERT INTO endereco (logradouro, numero, bairro, cidade, cep, uf, complemento, idUsuario) 
+            VALUES ('$logradouro','$numero','$bairro','$cidade','$cep','$uf','$complemento','$idUsuario')";
+            $stmt = $this->conn->prepare($sql_code);
+            $req2 = false;
+            if ($stmt->execute()) {
+                $req2 = true;
+            }
         }
 
         if($req1 and $req2) {

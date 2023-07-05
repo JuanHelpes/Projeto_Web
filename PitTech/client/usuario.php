@@ -34,33 +34,6 @@ if (count($_POST)> 0) {
     }else echo "Error";
 }
 
-// if (isset($_POST['email_login'], $_POST['senha_login'])) {
-
-//     $erro = false;
-
-//     if ($_POST['email_login'] == '' || $_POST['senha_login'] == '')
-//         $erro = true;
-
-//     if (!$erro) {
-//         include("../API/usuario.php");
-//         include("../API/Conn.php");
-
-//         $dbConnection = new DatabaseConnection();
-//         $conexao = $dbConnection->connectDB();
-
-//         $email = $_POST['email_login'];
-//         $senha = $_POST['senha_login'];
-//         $usuario = new Usuario($conexao);
-
-//         if ($usuario->login($email, $senha)) {
-//             $_SESSION['usuario'] = $email;
-//             header("Location: index.html");
-//         } else {
-//         }
-//     }
-// }
-
-
 
 ?>
 
@@ -97,7 +70,7 @@ if (count($_POST)> 0) {
                 <a style="margin: 25px; color: black;" class="bi bi-person-circle fs-1" href="#">
                     <p class="texto-menor">Faça Login ou crie seu Cadastro</p>
                 </a>
-                <a style="margin: 25px; color: black;" class="bi bi-cart3 fs-2" href="#"></a>
+                <a style="margin: 25px; color: black;" class="bi bi-cart3 fs-2" href="carrinho.php"></a>
                 </ul>
             </div>
         </div>
