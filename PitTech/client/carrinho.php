@@ -1,5 +1,4 @@
 <?php
-
 include("../API/Produto.php");
 include("../API/usuario.php");
 include("../API/Conn.php");
@@ -37,29 +36,7 @@ $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
 </head>
 
 <body class="bg-light-subtle">
-    <nav style="background-color: #ff8e00;" class="cor-fundo navbar navbar-expand-md">
-        <div class=" container-fluid">
-            <a style="margin-right: 40px; margin-left: 40px;" class="navbar-brand" href="#">
-                <h1 class="m-0"><img class="d-block" src="../assets/logodog3.png" style="width: 120px;" alt="PitTech">
-                </h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <form class="d-flex collapse navbar-collapse" role="search">
-                    <input class="form-control me-2 rounded-0" type="search" placeholder="Digite o produto" aria-label="Search">
-                    <button class="btn btn-outline-light rounded-0" type="submit">Buscar</button>
-                </form>
-                <a style="margin: 25px; color: black;" class="bi bi-person-circle fs-1" href="#">
-                    <p class="texto-menor">Faça Login ou crie seu Cadastro</p>
-                </a>
-                <a style="margin: 25px; color: black;" class="bi bi-cart3 fs-2" href="#"></a>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php require("cabecalho.php") ?>
 
     <div class="d-flex flex-wrap m-2">
         <div class="d-flex flex-column container">
@@ -111,7 +88,7 @@ $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
                 <div id="modal" class="modal">
                     <div class="modal-content">
                         <p>Tem certeza que deseja continuar?</p>
-                        <p><?php echo $produto['idProduto'] ;?></p>
+                        <p><?php echo $produto['idProduto']; ?></p>
                         <div class="modal-buttons">
                             <button onclick="fecharModal()">Não</button>
                             <button onclick="fazerAlgo()">Sim</button>

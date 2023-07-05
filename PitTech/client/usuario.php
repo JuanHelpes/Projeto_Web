@@ -1,4 +1,4 @@
-'<?php
+<?php
 include("../API/usuario.php");
 include("../API/Conn.php");
 
@@ -15,10 +15,10 @@ $dadosUsuario = $usuario->dadosUsuario($_SESSION['id']);
 
 $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
 
-if (count($_POST)> 0) {
+if (count($_POST) > 0) {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
-    
+
     $cep = $_POST['cep'];
     $logradouro = $_POST['logradouro'];
     $numero = $_POST['numero'];
@@ -27,11 +27,11 @@ if (count($_POST)> 0) {
     $complemento = $_POST['complemento'];
     $uf = $_POST['uf'];
 
-    if($usuario->atualizaDados($_SESSION['id'], $nome, $email, $cep, $logradouro, $numero, $bairro, $cidade, $complemento, $uf)){
+    if ($usuario->atualizaDados($_SESSION['id'], $nome, $email, $cep, $logradouro, $numero, $bairro, $cidade, $complemento, $uf)) {
         $dadosUsuario = $usuario->dadosUsuario($_SESSION['id']);
         $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
         echo 'alterado com sucesso';
-    }else echo "Error";
+    } else echo "Error";
 }
 
 
@@ -52,29 +52,8 @@ if (count($_POST)> 0) {
 </head>
 
 <body class="bg-light-subtle">
-    <nav style="background-color: #ff8e00;" class="cor-fundo navbar navbar-expand-md">
-        <div class=" container-fluid">
-            <a style="margin-right: 40px; margin-left: 40px;" class="navbar-brand" href="#">
-                <h1 class="m-0"><img class="d-block" src="../assets/logodog3.png" style="width: 120px;" alt="PitTech">
-                </h1>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <form class="d-flex collapse navbar-collapse" role="search">
-                    <input class="form-control me-2 rounded-0" type="search" placeholder="Digite o produto" aria-label="Search">
-                    <button class="btn btn-outline-light rounded-0" type="submit">Buscar</button>
-                </form>
-                <a style="margin: 25px; color: black;" class="bi bi-person-circle fs-1" href="#">
-                    <p class="texto-menor">Faça Login ou crie seu Cadastro</p>
-                </a>
-                <a style="margin: 25px; color: black;" class="bi bi-cart3 fs-2" href="carrinho.php"></a>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php require("cabecalho.php") ?>
 
     <h3 class="d-flex m-4 align-items-center"><a style="color: #ff8e00;" class="bi bi-person-fill" href=""></a> MEUS
         DADOS</h3>
