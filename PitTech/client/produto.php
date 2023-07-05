@@ -4,6 +4,10 @@ $id = intval($_GET['id']);
 include("../API/Produto.php");
 include("../API/Conn.php");
 
+if (!isset($_SESSION)) {
+  session_start();
+}
+
 $dbConnection = new DatabaseConnection();
 $conexao = $dbConnection->connectDB();
 
@@ -12,15 +16,28 @@ $produto = new Produto($conexao);
 $produto = $produto->pesquisa_id($id);
 
 
-if (isset($_SESSION['id'])) {
-  include("../API/Carrinho.php");
-  $carrinho = new Carrinho($conexao);
-
-  function compra()
-  {
-    $carrinho->adicionar(isset($_SESSION['id']), $produto['idProduto']); 
+if(isset($_POST['idCarrinho'])){
+  if (isset($_SESSION['id'])) {
+    include("../API/Carrinho.php");
+    $carrinho = new Carrinho($conexao);
+    if($carrinho->adicionar(isset($_SESSION['id']), $produto['idProduto'])){
+      echo "Produto adicionado";
+    }
+    else echo "Erro";
+  }else {
+    header("Location: index.php");
   }
+  
 }
+// if (isset($_SESSION['id'])) {
+//   include("../API/Carrinho.php");
+//   $carrinho = new Carrinho($conexao);
+
+//   function compra()
+//   {
+//     $carrinho->adicionar(isset($_SESSION['id']), $produto['idProduto']);
+//   }
+// }
 
 
 ?>
@@ -95,15 +112,10 @@ if (isset($_SESSION['id'])) {
         <p style="color: #1F9050; font-size: 18px;"><strong>R$ <?php echo $produto['valor']; ?></strong></p>
       </div>
       <div class="d-flex flex-column w-auto align-items-center mt-auto">
-        <a style="color: #ff8e00; font-weight: 500; border-radius: 15px;" class="compra bi bi-cart3 fs-6 text-decoration-none m-1 border p-1 border-dark border" onclick="<?php if (isset($_SESSION['id'])) 
-    {
-      header("Location: carrinho.php");
-    }
-     else 
-    { 
-      header("Location: login.php");
-    } ?>""> ADICIONAR NO
-          CARRINHO</a>
+        <form method="POST">
+          <input style="display: none;" type="text" name="idCarrinho">
+          <button style="color: #ff8e00; font-weight: 500; border-radius: 15px;" class="compra bi bi-cart3 fs-6 text-decoration-none m-1 border p-1 border-dark border" type="submit">ADICIONAR NO CARRINHO</button>
+        </form>
       </div>
     </div>
   </div>

@@ -36,7 +36,7 @@ if (isset($_SESSION['id'])) {
         <div class="texto-menor div-login-cadastro"><?php echo $loginText ?><p><?php echo $loginText2 ?></p>
         </div>
       </a>
-      <a style="margin-left: 15px; margin-right: 35px ;color: black;" class="bi bi-cart3 fs-2" href="#"></a>
+      <a style="margin-left: 15px; margin-right: 35px ;color: black;" class="bi bi-cart3 fs-2" href="carrinho.php"></a>
       </ul>
     </div>
   </div>

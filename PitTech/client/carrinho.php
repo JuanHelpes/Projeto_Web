@@ -17,6 +17,11 @@ $produtos = $produtos->pesquisaCarrinho($_SESSION['id']);
 
 $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
 
+
+if(isset($_POST['id'])){
+    
+}
+
 ?>
 
 
@@ -49,10 +54,10 @@ $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
                     <p class="m-0"><?php if (!empty($dadosEndereco['logradouro'])) echo $dadosEndereco['logradouro'];
                                     else echo "Logradouro: Não cadastrado" ?>, <?php if (!empty($dadosEndereco['bairro'])) echo $dadosEndereco['bairro'];
                                                                                 else echo "Bairro: Não cadastrado" ?></p>
-                    <p class="m-0">Número: <?php if (!empty($dadosEndereco['numero'])) echo $dadosEndereco['numero'];
+                    <p class="m-0"><?php if (!empty($dadosEndereco['numero'])) echo $dadosEndereco['numero'];
                                             else echo "Numero: Não cadastrado" ?>, <?php if (!empty($dadosEndereco['complemento'])) echo $dadosEndereco['complemento'];
                                                                                     else echo "Complemento: Não cadastrado"  ?></p>
-                    <p class="m-0">CEP <?php if (!empty($dadosEndereco['cep'])) echo $dadosEndereco['cep'];
+                    <p class="m-0"><?php if (!empty($dadosEndereco['cep'])) echo $dadosEndereco['cep'];
                                         else echo "CEP: Não cadastrado" ?> - <?php if (!empty($dadosEndereco['cidade'])) echo $dadosEndereco['cidade'];
                                                                                 else echo "Cidade: Não cadastrado" ?>, <?php if (!empty($dadosEndereco['uf'])) echo $dadosEndereco['uf'];
                                                                                                                         else echo "UF: Não cadastrado" ?></p>
@@ -67,7 +72,7 @@ $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
                     <a style="color: #ff8e00;" class="bi bi-handbag-fill fs-4" href="#"></a>
                     <h4 class="m-0">PRODUTOS</h4>
                 </div>
-                <?php $total = 0;
+                <?php $total = 0; if ($produtos != ''){
                 foreach ($produtos as &$produto) {
                     $total += $produto['valor']; ?>
                     <div id="produto">
@@ -79,10 +84,10 @@ $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <a style="color: #ff0000; font-weight: 500; border: 1px, #ff0000 solid;" class="bi bi-trash-fill fs-6 text-decoration-none m-1 border p-1 border-2 border-danger" onclick="abrirModal(<?php echo $produto['idProduto']  ?>)">REMOVER</a>
+                            <a style="color: #ff0000; font-weight: 500; border: 1px, #ff0000 solid;" class="bi bi-trash-fill fs-6 text-decoration-none m-1 border p-1 border-2 border-danger" onclick="abrirModal(<?php echo $produto['idProduto']?>)">REMOVER</a>
                         </div>
                     </div>
-                <?php } ?>
+                <?php }}else{ echo "sem produtos";}?>
 
                 <!-- Modal -->
                 <div id="modal" class="modal">
@@ -91,7 +96,10 @@ $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
                         <p><?php echo $produto['idProduto']; ?></p>
                         <div class="modal-buttons">
                             <button onclick="fecharModal()">Não</button>
-                            <button onclick="fazerAlgo()">Sim</button>
+                            <form method="POST">
+                                <input style="display: none;" name="id" id="valorId" type="text">
+                                <button type="submit" >Sim</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -136,6 +144,8 @@ $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
             // console.log(idProduto);
 
             var modal = document.getElementById("modal");
+            var id = document.getElementById("valorId");
+            id.value = idProduto;
             modal.style.display = "block";
         }
 
@@ -147,6 +157,7 @@ $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
 
         // Função para executar alguma ação ao clicar em "Sim"
         function fazerAlgo(idProduto) {
+            console.log(idProduto);
             // Coloque aqui o código que deseja executar
             console.log("Ação executada!");
 
