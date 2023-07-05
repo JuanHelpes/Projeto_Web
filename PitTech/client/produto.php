@@ -1,9 +1,8 @@
 <?php
 $id = intval($_GET['id']);
+
 include("../API/Produto.php");
 include("../API/Conn.php");
-
-
 
 $dbConnection = new DatabaseConnection();
 $conexao = $dbConnection->connectDB();
@@ -11,6 +10,18 @@ $conexao = $dbConnection->connectDB();
 $produto = new Produto($conexao);
 
 $produto = $produto->pesquisa_id($id);
+
+
+if (isset($_SESSION['id'])) {
+  include("../API/Carrinho.php");
+  $carrinho = new Carrinho($conexao);
+
+  function compra()
+  {
+    $carrinho->adicionar(isset($_SESSION['id']), $produto['idProduto']); 
+  }
+}
+
 
 ?>
 
@@ -84,7 +95,14 @@ $produto = $produto->pesquisa_id($id);
         <p style="color: #1F9050; font-size: 18px;"><strong>R$ <?php echo $produto['valor']; ?></strong></p>
       </div>
       <div class="d-flex flex-column w-auto align-items-center mt-auto">
-        <a style="color: #ff8e00; font-weight: 500; border-radius: 15px;" class="compra bi bi-cart3 fs-6 text-decoration-none m-1 border p-1 border-dark border" href="#"> ADICIONAR NO
+        <a style="color: #ff8e00; font-weight: 500; border-radius: 15px;" class="compra bi bi-cart3 fs-6 text-decoration-none m-1 border p-1 border-dark border" onclick="<?php if (isset($_SESSION['id'])) 
+    {
+      header("Location: carrinho.php");
+    }
+     else 
+    { 
+      header("Location: login.php");
+    } ?>""> ADICIONAR NO
           CARRINHO</a>
       </div>
     </div>
