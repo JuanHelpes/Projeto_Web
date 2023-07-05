@@ -11,6 +11,27 @@ $produtos = new Produto($conexao);
 $categoria = intval($_GET['categoria']);
 $produtos = $produtos->pesquisa($categoria);
 
+switch($categoria){
+    case 1:
+        $categoria = "Hardware";
+        break;
+    case 2:
+        $categoria = "Perifericos";
+        break;
+    case 3:
+        $categoria = "Computadores";
+        break;
+    case 4:
+        $categoria = "Games";
+        break;
+    case 5:
+        $categoria = "Notebooks";
+        break;
+    case 6:
+        $categoria = "Acessorios";
+        break;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +80,7 @@ $produtos = $produtos->pesquisa($categoria);
     </nav>
 
     <!-- Example Code -->
-    <h2 class="container text-center my-3 my-xl-5">Categoria: XX</h2>
+    <h2 class="container text-center my-3 my-xl-5">Categoria: <?php echo $categoria; ?></h2>
 
     <div class="container row mx-auto g-4">
         <!-- <div class="col-md-6 col-sm-12 col-xl-4 ">
@@ -122,7 +143,7 @@ $produtos = $produtos->pesquisa($categoria);
         <?php } ?>
     </div>
 
-    <footer class="text-center footer-bg">
+    <footer class="text-center rodape">
         <p class="py-3">2023 <i class="bi bi-c-circle"></i> Desenvolvido pelos alunos do CEFET-Leopoldina | Projeto sem
             fins
             comerciais</p>
