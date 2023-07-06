@@ -60,9 +60,8 @@ switch($categoria){
                 <div class="d-flex flex-column card align-items-center w-75 p-4 gap-1 shadow">
                     <img style="width: 250px; height: 250px;" src="<?php echo $produto['imagem1']; ?>" alt="">
                     <span style="overflow-y: scroll; height: 70px;" class="title"><strong><?php echo $produto['descricao']; ?></strong></span>
-                    <span class="valor price">R$ <?php echo $produto['valor']; ?></span>
+                    <span class="valor price">R$ <?php echo number_format($produto['valor'], 2, ',', '.'); ?></span>
                     <button class="button w-75" onclick="window.location.href='produto.php?id=<?php echo $produto['idProduto']; ?>'">Ver mais</button>
-                    <button class="button bi bi-cart3 fs-6 w-75">Adicionar no carrinho</button>
                 </div>
             </div>
         <?php } ?>

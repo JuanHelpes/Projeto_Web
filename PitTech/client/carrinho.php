@@ -2,22 +2,31 @@
 include("../API/Produto.php");
 include("../API/usuario.php");
 include("../API/Conn.php");
+include('../API/Carrinho.php');
 
 if (!isset($_SESSION)) {
     session_start();
 }
 
-$produtos = '';
+$produto='';
 
 if (isset($_SESSION['id'])) {
     $dbConnection = new DatabaseConnection();
     $conexao = $dbConnection->connectDB();
-
     $produtos = new Produto($conexao);
     $usuario = new Usuario($conexao);
     $produtos = $produtos->pesquisaCarrinho($_SESSION['id']);
-
     $dadosEndereco = $usuario->enderecoUsuario($_SESSION['id']);
+}
+
+if(isset($_POST['valorId']))
+{   
+    $dbConnection = new DatabaseConnection();
+    $conexao = $dbConnection->connectDB();
+    $produtos = new Produto($conexao);
+    $carrinho = new Carrinho($conexao);
+    $carrinho->remover($_SESSION['id'], $_POST['valorId']);
+    $produtos = $produtos->pesquisaCarrinho($_SESSION['id']);
 }
 
 ?>
@@ -42,7 +51,7 @@ if (isset($_SESSION['id'])) {
     <?php require("cabecalho.php") ?>
 
     <div class="d-flex flex-wrap m-2">
-        <div class="d-flex flex-column container">
+        <div style="width: 80%;" class="d-flex flex-column container">
             <div class="d-flex flex-column container gap-1 mt-4 shadow g-col-6">
                 <div class="d-flex align-items-center gap-2">
                     <a style="color: #ff8e00;" class="bi bi-geo-alt-fill fs-2" href="#"></a>
@@ -92,34 +101,19 @@ if (isset($_SESSION['id'])) {
                 } ?>
 
                 <!-- Modal -->
-                <div id="modal" class="modal">
+                <div id="modal" class="modal modal2">
                     <div class="modal-content">
                         <p>Tem certeza que deseja continuar?</p>
-                        <p><?php echo $produto['idProduto']; ?></p>
-                        <div class="modal-buttons">
-                            <button onclick="fecharModal()">Não</button>
+                        <div class="modal-buttons botoes">
                             <form method="POST">
-                                <input style="display: none;" name="id" id="valorId" type="text">
+                                <input style="display: none;" name="valorId" id="valorId" type="text">
                                 <button type="submit">Sim</button>
                             </form>
+                            <button onclick="fecharModal()">Não</button>
                         </div>
                     </div>
                 </div>
 
-                <!--            
-                <div id="produto">
-                    <div class="d-flex m-0 gap-1 p-0 bg-light align-items-center gap-2">
-                        <img style="width: 90px;" src="./assets/exemplo.jpg" alt="produto1">
-                        <div class="d-flex flex-column gap-0">
-                            <p class="m-0">Nome</p>
-                            <p class="m-0">Descricao do produto</p>
-                            <p class="m-0">Preço: R$300,00</p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <a style="color: #ff0000; font-weight: 500; border: 1px, #ff0000 solid;" class="bi bi-trash-fill fs-6 text-decoration-none m-1 border p-1 border-2 border-danger" href="#">REMOVER</a>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div style="width: 15%; height: 20%;" class="d-flex flex-column border shadow bg-light m-4 p-4">
@@ -131,7 +125,7 @@ if (isset($_SESSION['id'])) {
             </div>
             <div class="d-flex flex-column">
                 <a style="color: #ff8e00; font-weight: 500;" class="text-decoration-none m-1 border p-1 border-2" href="#">IR PARA O PAGAMENTO</a>
-                <a style="color: #ff8e00; font-weight: 500;" class="text-decoration-none m-1 border p-1 border-2 border" href="#">CONTINUAR COMPRANDO</a>
+                <a style="color: #ff8e00; font-weight: 500;" class="text-decoration-none m-1 border p-1 border-2 border" href="index.php">CONTINUAR COMPRANDO</a>
             </div>
         </div>
     </div>
@@ -148,7 +142,9 @@ if (isset($_SESSION['id'])) {
             var modal = document.getElementById("modal");
             var id = document.getElementById("valorId");
             id.value = idProduto;
-            modal.style.display = "block";
+            modal.style.display = "flex";
+            modal.style.height = "200px";
+            modal.style.width = "200px";
         }
 
         // Função para fechar o modal
@@ -157,15 +153,7 @@ if (isset($_SESSION['id'])) {
             modal.style.display = "none";
         }
 
-        // Função para executar alguma ação ao clicar em "Sim"
-        function fazerAlgo(idProduto) {
-            console.log(idProduto);
-            // Coloque aqui o código que deseja executar
-            console.log("Ação executada!");
 
-            // Feche o modal após ação ser executada
-            fecharModal();
-        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 </body>

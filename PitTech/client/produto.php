@@ -21,7 +21,7 @@ if(isset($_POST['idCarrinho'])){
     include("../API/Carrinho.php");
     $carrinho = new Carrinho($conexao);
     if($carrinho->adicionar(isset($_SESSION['id']), $produto['idProduto'])){
-      echo "Produto adicionado";
+      echo "<script>alert('Produto adicionado ao carrinho!');</script>";
     }
     else echo "Erro";
   }else {
@@ -29,15 +29,6 @@ if(isset($_POST['idCarrinho'])){
   }
   
 }
-// if (isset($_SESSION['id'])) {
-//   include("../API/Carrinho.php");
-//   $carrinho = new Carrinho($conexao);
-
-//   function compra()
-//   {
-//     $carrinho->adicionar(isset($_SESSION['id']), $produto['idProduto']);
-//   }
-// }
 
 
 ?>
@@ -109,7 +100,7 @@ if(isset($_POST['idCarrinho'])){
       <h5 style="color: #ff8e00; font-weight: 400; font-size: 22px;" class="text-decoration-none m-1 p-1"><?php echo $produto['estoque']; ?></h5>
       <div style="background-color: #E5FFF1;" class="d-flex flex-column align-items-center p-2 mt-5 w-75 shadow">
         <p class="bi bi-cash fs-6"> Valor à vista no <strong>Pix</strong></p>
-        <p style="color: #1F9050; font-size: 18px;"><strong>R$ <?php echo $produto['valor']; ?></strong></p>
+        <p style="color: #1F9050; font-size: 18px;"><strong>R$ <?php echo  $produto['valor']; ?></strong></p>
       </div>
       <div class="d-flex flex-column w-auto align-items-center mt-auto">
         <form method="POST">

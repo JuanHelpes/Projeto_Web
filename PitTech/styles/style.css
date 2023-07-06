@@ -118,3 +118,20 @@ body{
     font-size: 25px;
     color: #ff8e00;
   }
+
+.modal-content{
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
+
+.botoes{
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modal2{
+  margin-left: 43vw;
+  display: "flex";
+}
