@@ -126,7 +126,7 @@ if (count($_POST) > 0) {
             </form>
         </div>
     </div>
-    <footer class="text-center">
+    <footer class="text-center footer-bg">
         <p class="py-3">2023 <i class="bi bi-c-circle"></i> Desenvolvido pelos alunos do CEFET-Leopoldina | Projeto sem
             fins
             comerciais</p>

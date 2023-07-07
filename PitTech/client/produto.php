@@ -100,7 +100,7 @@ if(isset($_POST['idCarrinho'])){
       <h5 style="color: #ff8e00; font-weight: 400; font-size: 22px;" class="text-decoration-none m-1 p-1"><?php echo $produto['estoque']; ?></h5>
       <div style="background-color: #E5FFF1;" class="d-flex flex-column align-items-center p-2 mt-5 w-75 shadow">
         <p class="bi bi-cash fs-6"> Valor à vista no <strong>Pix</strong></p>
-        <p style="color: #1F9050; font-size: 18px;"><strong>R$ <?php echo  $produto['valor']; ?></strong></p>
+        <p style="color: #1F9050; font-size: 18px;"><strong>R$ <?php echo number_format($produto['valor'], 2, ',', '.'); ?></strong></p>
       </div>
       <div class="d-flex flex-column w-auto align-items-center mt-auto">
         <form method="POST">
@@ -112,7 +112,7 @@ if(isset($_POST['idCarrinho'])){
   </div>
   <div class="d-flex flex-column align-items-center">
 
-    <div id="myDiv" class="d-flex flex-column w-100 align-items-center shadow">
+    <div id="myDiv" class="d-flex flex-column w-100 align-items-center shadow" style="overflow-y:hidden; margin-botton: 40px;">
       <div id="toggleButton" class="d-flex align-items-center justify-content-end">
         <h1 style="color: #ff8e00; font-weight: 400;" class="text-decoration-none m-1 p-1">Descrição do Produto</h1>
         <a style="color: #ff8e00; font-weight: 500; border-radius: 15px;" class="bi bi-caret-down-fill fs-3 w-10 align-items-end text-decoration-none"></a>
@@ -134,7 +134,7 @@ if(isset($_POST['idCarrinho'])){
 
     toggleButton.addEventListener("click", function() {
       if (myDiv.style.height === "65px") {
-        myDiv.style.height = "200px";
+        myDiv.style.height = "350px";
       } else {
         myDiv.style.height = "65px";
       }

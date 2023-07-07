@@ -148,7 +148,7 @@ $produtos = $produtos->pesquisa_palavra('');
     </div>
     
   <div class="divs-novidades"></div>
-  <footer class="text-center rodape">
+  <footer class="text-center footer-bg">
     <p class="py-3">2023 <i class="bi bi-c-circle"></i> Desenvolvido pelos alunos do CEFET-Leopoldina | Projeto sem fins
       comerciais</p>
   </footer>

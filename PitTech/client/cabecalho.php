@@ -32,7 +32,7 @@ if (isset($_SESSION['id'])) {
         <input class="form-control me-2 rounded-0" type="search" placeholder="Digite o produto" aria-label="Search" name="palavra">
         <button class="btn btn-outline-dark rounded-0" type="submit">Buscar</button>
       </form>
-      <a style="margin-left: 35px; margin-right: 35px; color: black;" class=" <?php echo $icone ?> fs-1" href="<?php echo $link ?>">
+      <a style="margin-left: 35px; margin-right: 35px; color: black; text-decoration: none;" class=" <?php echo $icone ?> fs-1" href="<?php echo $link ?>">
         <div class="texto-menor div-login-cadastro"><?php echo $loginText ?><p><?php echo $loginText2 ?></p>
         </div>
       </a>

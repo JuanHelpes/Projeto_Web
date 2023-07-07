@@ -8,7 +8,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$produto='';
+$produtos='';
 
 if (isset($_SESSION['id'])) {
     $dbConnection = new DatabaseConnection();
@@ -129,7 +129,7 @@ if(isset($_POST['valorId']))
             </div>
         </div>
     </div>
-    <footer class="text-center">
+    <footer class="text-center footer-bg ">
         <p class="py-3">2023 <i class="bi bi-c-circle"></i> Desenvolvido pelos alunos do CEFET-Leopoldina | Projeto sem
             fins
             comerciais</p>
